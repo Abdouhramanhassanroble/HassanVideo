@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+
+   <body>
+      <div class="wrapper">
+         <div class="card front-face">
+            <img src="{% static 'images/abdou.jpg' %}">
+         </div>
+         <div class="card back-face">
+            <img src="{% static 'images/abdou.jpg' %}">
+            <div class="info">
+               <div class="title">
+                  {{ name }} {{ last_name }}
+               </div>
+               <p>
+                  User interface designer and <br>front-end developer
+               </p>
+            </div>
+            <ul>
+               <a href="#"><i class="fab fa-facebook-f"></i></a>
+               <a href="#"><i class="fab fa-twitter"></i></a>
+               <a href="#"><i class="fab fa-instagram"></i></a>
+               <a href="#"><i class="fab fa-youtube"></i></a>
+            </ul>
+         </div>
+      </div>
+   </body>
+    
+{% endblock content %}

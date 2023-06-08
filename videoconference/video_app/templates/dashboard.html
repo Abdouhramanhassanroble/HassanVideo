@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+  <body>
+    <div class="dashboard">
+        <h1>Bienvenue, {{name}}!</h1>
+        <!-- create a "New Meeting" button -->
+        <a href="{% url 'meeting' %}" class="button">Nouveau Meeting</a>
+        <a href="{% url 'joinroom' %}" class="button">Rejoindre Meeting</a>
+        <a href="{% url 'logout' %}" class="button">Se déconnecter</a>
+    </div>
+  </body>
+  {% endblock content %}
