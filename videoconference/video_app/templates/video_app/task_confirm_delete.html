@@ -1,6 +1,19 @@
-<a href="{% url 'tasks' %}">Retour</a>
-<form method="POST">
-    {% csrf_token %}
-    <p> Êtes vous sur de vouloir supprimer cette tâche ? "{{ task }}"  </p>
-    <input type="submit" value="Supprimer" />
-</form>
+{% extends 'video_app/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Retour</a>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+         <b> Êtes-vous sûr de vouloir supprimer la tâche "{{task}}" ?</b> </p>
+        <input class="button" type="submit" value="Supprimer" />
+    </form>
+</div>
+
+
+
+{% endblock content %}

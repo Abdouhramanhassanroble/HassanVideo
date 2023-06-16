@@ -7,7 +7,7 @@
       <header>Rejoindre la room</header>
       <form action="{% url 'joinroom' %}" method="POST">
         {% csrf_token %}
-        <input type="text" placeholder="Enter room ID" name="roomID">
+        <input type="text" placeholder="Entrez les 4 chiffres de la ROOM" name="roomID">
         <input type="submit" class="button" value="Join">
         <center>
           {% if success %}
