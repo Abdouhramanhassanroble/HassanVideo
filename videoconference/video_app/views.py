@@ -1,7 +1,14 @@
+from typing import Any, Dict
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, EditUserForm
+from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Task
+
 
 # Create your views here.
 def home(request):
@@ -58,20 +65,45 @@ def joinroom(request):
 def profile(request):
     return render(request, 'profile.html', {'name': request.user.first_name + " " + request.user.last_name })
 
-@login_required
-def editprofile(request):
-    if request.method == 'POST':
-        form = EditUserForm(request.POST, instance=request.user)
+class TaskList(ListView):
+    model = Task
+    context_object_name = 'tasks'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(complete=False).count()
         
-        if form.is_valid():
-            form.save()
-            return render(request, 'profile.html', {'success': 'Profil mis à jour avec succès'}) 
-        else:
-            error_message = form.errors.as_text()
-            return render(request, 'editprofile.html', {'error': error_message})
-        
-    form = EditUserForm(instance=request.user)
-    return render(request, 'editprofile.html', {'form': form})
+        search_input = self.request.GET.get('search') or ''
+        if search_input:
+            context['tasks'] = context['tasks'].filter(title__startswith=search_input)
+            
+            context['search_input'] = search_input
+        return context
+    
+    
+class TaskDetail(DetailView):
+    model = Task
+    context_object_name = 'task'
+    template_name = 'video_app/task.html'
 
+class TaskCreate(CreateView):
+    model = Task
+    fields = ['title', 'description', 'complete']
+    success_url = reverse_lazy('tasks')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user 
+        return super(TaskCreate, self).form_valid(form)
+
+class TaskUpdate(UpdateView):
+    model = Task
+    fields = ['title', 'description', 'complete']
+    success_url = reverse_lazy('tasks')
+        
+class DeleteView(DeleteView):
+    model = Task
+    context_object_name = 'task'
+    success_url = reverse_lazy('tasks')
 
 

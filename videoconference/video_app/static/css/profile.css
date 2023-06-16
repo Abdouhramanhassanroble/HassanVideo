@@ -10,7 +10,7 @@ html,body{
   height: 100%;
   width: 100%;
   place-items: center;
-  background: linear-gradient(375deg, #1cc7d0, #2ede98);
+  background: linear-gradient(375deg, #8C3434, #8C3434);
 }
 ::selection{
   color: #fff;
@@ -60,7 +60,7 @@ html,body{
   width: 150px;
   padding: 5px;
   border-radius: 50%;
-  background: linear-gradient(375deg, #1cc7d0, #2ede98);
+  background: linear-gradient(375deg, #8C3434, #8C3434);
 }
 .wrapper .back-face .info{
   text-align: center;
@@ -82,11 +82,11 @@ html,body{
   line-height: 38px;
   border: 2px solid transparent;
   border-radius: 50%;
-  background: linear-gradient(375deg, #1cc7d0, #2ede98);
+  background: linear-gradient(375deg, #8C3434, #8C3434);
   transition: all 0.5s ease;
 }
 .back-face ul a:hover{
-  color: #1cc7d0;
-  border-color: #1cc7d0;
+  color: #8C3434;
+  border-color: #8C3434;
   background: linear-gradient(375deg, transparent, transparent);
 }
